@@ -1,0 +1,100 @@
+/* ============================================================
+   Design tokens do Bolha — as mesmas variáveis usadas no
+   protótipo em HTML, agora como a fonte da verdade do app real.
+   Se você mudar uma cor aqui, o app inteiro muda.
+   ============================================================ */
+:root {
+  --deep: #0a1730;
+  --surface: #101e3d;
+  --panel: #152548;
+  --text: #f6f2e8;
+  --text-muted: #9aa7c7;
+  /* Cor de destaque do app — era laranja (--gold), agora "Sea" (fundo
+     do mar), conforme a identidade visual. Nome trocado de propósito
+     pra não confundir no futuro: essa variável NUNCA é dourada. */
+  --sea: #2ec4b6;
+  --sea-deep: #0f6f66;
+  --on-sea: #052e2a;
+  --teal: #5fb3ad;
+  --lavender: #a79bd1;
+  --pink: #c98ea6;
+  --mist: #d7e2f2;
+  --line: #26355c;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-logo: "Fredoka", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  background: var(--deep);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+.tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  display: inline-block;
+}
+
+/* Animações da tela "Estourar a bolha" (src/pages/Estourar.jsx). */
+
+@keyframes bolha-tunel {
+  0% { transform: scale(0.3); opacity: 0; }
+  15% { opacity: 0.9; }
+  100% { transform: scale(14); opacity: 0; }
+}
+
+@keyframes bolha-flash {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  60% { transform: scale(1.6); opacity: 0.5; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes bolha-entra {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bolha-boiar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Logo da tela inicial (Splash.jsx) atravessando a tela inteira, não
+   só balançando no lugar — por isso usa `top`/`left` em porcentagem
+   de um contêiner posicionado, em vez de um `translateY` pequeno. */
+@keyframes bolha-caminhar {
+  0%   { top: 12%; left: 8%; }
+  20%  { top: 60%; left: 62%; }
+  40%  { top: 18%; left: 68%; }
+  60%  { top: 58%; left: 14%; }
+  80%  { top: 30%; left: 40%; }
+  100% { top: 12%; left: 8%; }
+}
+
+/* Rolagem estilo app: dá pra arrastar/rolar normalmente, só que sem
+   a barra de rolagem visível (Firefox, Chrome/Safari e Edge/IE). */
+.rolagem-invisivel {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.rolagem-invisivel::-webkit-scrollbar {
+  display: none;
+}
